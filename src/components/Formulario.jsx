@@ -43,7 +43,9 @@ const Formulario = ({ setPacientes, Pacientes, Paciente }) => {
         }
 
         if(Paciente.id) {
-            console.log("Editando");
+            objetoPaciente.id = Paciente.id;
+            const pacientesActualizados = Pacientes.map(pacienteState => pacienteState.id === Paciente.id ? objetoPaciente : pacienteState);
+            setPacientes(pacientesActualizados);
         } else {
             objetoPaciente.id = generarId();
             setPacientes([...Pacientes, objetoPaciente]);
