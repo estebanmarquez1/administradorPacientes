@@ -1,13 +1,22 @@
 import { useEffect, useState } from "react"
 import Errores from './Errores'
 
-const Formulario = ({ setPacientes, Pacientes }) => {
+const Formulario = ({ setPacientes, Pacientes, Paciente }) => {
     const [nombre, setNombre] = useState('');
     const [email, setEmail] = useState('');
     const [admissionDate, setAdmissionDate] = useState('');
     const [symptoms, setSymptoms] = useState('');
 
     const [errores, setErrores] = useState(false);
+
+    useEffect(() => {
+        if(Object.keys(Pacientes).length > 0) {
+            setNombre(Paciente.nombre);
+            setEmail(Paciente.email);
+            setAdmissionDate(Paciente.admissionDate);
+            setSymptoms(Paciente.symptoms);
+        }
+    }, [Paciente])
     
     const generarId = () => {
         const random = Math.random().toString(36).substring(2); 
@@ -33,6 +42,12 @@ const Formulario = ({ setPacientes, Pacientes }) => {
             id: generarId()
         }
 
+        if(Paciente.id) {
+            console.log("Editando");
+        } else {
+            console.log("nuevo registro");
+        }
+
 
         setErrores(false);
         // console.log(Pacientes);
@@ -44,7 +59,7 @@ const Formulario = ({ setPacientes, Pacientes }) => {
         setSymptoms('');
     }
 
-    // console.log(nombre);
+    // console.log(nombre); 
     return (
 
         <div className="mx-5 md:w-1/2 lg:w-2/5">
@@ -71,7 +86,7 @@ const Formulario = ({ setPacientes, Pacientes }) => {
                     <label htmlFor="symptoms" className="block text-gray-700 uppercase font-bold">Situación del paciente</label>
                     <textarea id="symptoms" className="resize-none border-2 w-full p-2 placeholder-gray-400 rounded-md" placeholder="Describe la situación del paciente..." value={symptoms} onChange={(e) => setSymptoms(e.target.value)} />
                 </div>
-                <input type="submit" className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer" value="Agregar paciente" />
+                <input type="submit" className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer" value={Paciente.id ? "Editar Paciente" : "Agregar Paciente"} />
             </form>
         </div>
 
