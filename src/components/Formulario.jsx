@@ -39,19 +39,20 @@ const Formulario = ({ setPacientes, Pacientes, Paciente }) => {
             email,
             admissionDate,
             symptoms,
-            id: generarId()
+            
         }
 
         if(Paciente.id) {
             console.log("Editando");
         } else {
-            console.log("nuevo registro");
+            objetoPaciente.id = generarId();
+            setPacientes([...Pacientes, objetoPaciente]);
         }
 
 
         setErrores(false);
         // console.log(Pacientes);
-        setPacientes([...Pacientes, objetoPaciente]);
+        
         
         setNombre('');
         setEmail('');
