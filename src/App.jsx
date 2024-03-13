@@ -4,8 +4,13 @@ import Formulario from "./components/Formulario"
 import ListadoPacientes from "./components/ListadoPacientes"
 
 function App() {
-  const [Pacientes, setPacientes] = useState([]);
+  const [Pacientes, setPacientes] = useState(JSON.parse(localStorage.getItem('pacientes')) ?? []);
   const [Paciente, setPaciente] = useState({});
+
+  useEffect(() => {
+    localStorage.setItem('pacientes', JSON.stringify(Pacientes));
+  }, [Pacientes]);
+
   const eliminarPaciente = id => {
     const pacientesActualizados = Pacientes.filter(paciente => paciente.id !== id);
     setPacientes(pacientesActualizados);
