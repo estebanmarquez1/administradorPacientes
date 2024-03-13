@@ -1,13 +1,7 @@
-import { useEffect } from "react";
 import Paciente from "./Paciente";
 
 
-const ListadoPacientes = ({Pacientes, setPaciente}) => {
-    useEffect(() => {
-      if(Pacientes.length > 0) {
-        console.log("nuevo paciente");
-      }
-    }, [Pacientes])
+const ListadoPacientes = ({Pacientes, setPaciente, eliminarPaciente}) => {
   return (
     
     <div className="md:w-1/2 lg:w-3/5 md:h-screen md:overflow-y-scroll">
@@ -22,6 +16,7 @@ const ListadoPacientes = ({Pacientes, setPaciente}) => {
               key={paciente.id} //Cada vez que se genera una lista se le tiene que agregar un key.
               paciente={paciente}
               setPaciente={setPaciente}
+              eliminarPaciente = {eliminarPaciente}
             />
           ))}
        </>  
